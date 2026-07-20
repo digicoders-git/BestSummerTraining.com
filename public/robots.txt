@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block common non-public directories if applicable
+Disallow: /admin/
+Disallow: /vendor/
+Disallow: /storage/
+
+Sitemap: https://example.com/sitemap.xml
