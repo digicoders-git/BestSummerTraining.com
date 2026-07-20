@@ -301,8 +301,21 @@ a:hover {
     box-shadow: var(--shadow-sm) !important;
 }
 
-[data-theme="dark"] .bg-primary-custom.bg-opacity-10 {
-    background-color: var(--primary-light) !important;
+[data-theme="dark"] .bg-primary-custom.bg-opacity-10,
+html[data-theme="dark"] .bg-primary-custom.bg-opacity-10 {
+    background-color: rgba(10, 100, 213, 0.15) !important;
+}
+
+[data-theme="dark"] .badge-premium,
+html[data-theme="dark"] .badge-premium {
+    background: rgba(62, 174, 240, 0.12) !important;
+    color: #3EAEF0 !important;
+    border-color: rgba(62, 174, 240, 0.25) !important;
+}
+
+[data-theme="dark"] .text-primary-custom,
+html[data-theme="dark"] .text-primary-custom {
+    color: #3EAEF0 !important;
 }
 
 /* Bootstrap forms in dark mode */
