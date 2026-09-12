@@ -36,7 +36,7 @@
                         </div>
                         <h4 class="fw-bold mb-2">+91 9198483820</h4>
                         <p class="text-muted-custom small mb-4">Official Helpline &amp; Admission Counseling</p>
-                        
+
                         <div class="d-flex gap-2 justify-content-center">
                             <a href="tel:9198483820" class="btn btn-primary-custom rounded-pill px-3 py-2 small d-inline-flex align-items-center gap-2">
                                 <i class="bi bi-telephone-outbound"></i> Call Now
@@ -57,7 +57,7 @@
                         </div>
                         <h4 class="fw-bold mb-2">+91 6394296293</h4>
                         <p class="text-muted-custom small mb-4">Course Details &amp; Career Consultation</p>
-                        
+
                         <div class="d-flex gap-2 justify-content-center">
                             <a href="tel:6394296293" class="btn btn-primary-custom rounded-pill px-3 py-2 small d-inline-flex align-items-center gap-2">
                                 <i class="bi bi-telephone-outbound"></i> Call Now
@@ -78,7 +78,7 @@
                         </div>
                         <h4 class="fw-bold mb-2">+91 9801017529</h4>
                         <p class="text-muted-custom small mb-4">Student Support &amp; General Inquiries</p>
-                        
+
                         <div class="d-flex gap-2 justify-content-center">
                             <a href="tel:9801017529" class="btn btn-primary-custom rounded-pill px-3 py-2 small d-inline-flex align-items-center gap-2">
                                 <i class="bi bi-telephone-outbound"></i> Call Now
@@ -100,7 +100,7 @@
                 <h3 class="fw-bold mb-3">Connect With Us On Social Media</h3>
                 <p class="text-muted-custom">Follow our social channels for course updates, success stories, and educational content.</p>
             </div>
-            
+
             <div class="d-flex flex-wrap justify-content-center gap-3 fade-up animate-on-scroll">
                 <a href="https://www.facebook.com/digicoderstech" target="_blank" rel="noopener noreferrer" class="premium-card text-decoration-none d-flex align-items-center bg-white dark-bg-dark px-4 py-3 rounded-pill border">
                     <i class="bi bi-facebook text-primary-custom fs-5 me-2"></i>
@@ -135,7 +135,7 @@
                 subtitle="Common questions about contacting our educational training team."
                 divider="true"
             />
-            
+
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="row">
@@ -175,6 +175,9 @@
 
 
 
+    <!-- Callback Request Form Section -->
+    @include('components.callback-section', ['formId' => 'contactCallbackForm'])
+
     <!-- CTA Section -->
     @include('components.cta', [
         'title' => 'Ready to Find the Right Training Program?',
@@ -184,5 +187,5 @@
         'secondaryLink' => url('/summer-training-comparison'),
         'secondaryText' => 'Explore Summer Training'
     ])
-    
+
 @endsection

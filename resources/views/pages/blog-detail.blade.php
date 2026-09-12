@@ -110,7 +110,7 @@
     @include('components.page-hero', [
         'breadcrumbs' => [
             'Home' => url('/'), 
-            'Blog' => url('/blog'),
+            'Blogs' => url('/blog'),
             'Article' => url()->current()
         ],
         'badge' => $post['category'],
@@ -119,7 +119,7 @@
         'primaryLink' => '#article-body',
         'primaryBtnText' => 'Read Article',
         'secondaryLink' => url('/blog'),
-        'secondaryBtnText' => 'Back to Blog'
+        'secondaryBtnText' => 'Back to Blogs'
     ])
 
     <!-- Article Content Section -->
@@ -132,27 +132,55 @@
                     <div class="why-feature-card p-4 p-md-5 border-0 overflow-hidden position-relative" style="border-radius: 24px !important;">
                         
                         <!-- Article Header Meta -->
-                        <div class="d-flex flex-wrap align-items-center gap-3 mb-4 text-muted small pb-3 border-bottom" style="border-color: rgba(0, 109, 171, 0.1) !important;">
-                            <div class="d-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(0, 109, 171, 0.08); border: 1px solid rgba(0, 109, 171, 0.12);">
-                                <i class="bi bi-patch-check-fill text-primary" style="font-size: 0.95rem;"></i>
-                                <span class="fw-semibold text-primary" style="font-size: 0.82rem;">Verified Guide</span>
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 text-muted small pb-3 border-bottom" style="border-color: rgba(0, 109, 171, 0.1) !important;">
+                            <div class="d-flex flex-wrap align-items-center gap-3">
+                                <div class="d-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(0, 109, 171, 0.08); border: 1px solid rgba(0, 109, 171, 0.12);">
+                                    <i class="bi bi-person-fill text-primary" style="font-size: 0.95rem;"></i>
+                                    <span class="fw-semibold text-primary" style="font-size: 0.82rem;">{{ $post['author'] ?? 'DigiCoders Team' }}</span>
+                                </div>
+                                <div class="vr" style="height: 30px; opacity: 0.2;"></div>
+                                <div>
+                                    <span class="d-block fw-semibold text-heading">{{ $post['date'] }}</span>
+                                    <span class="small" style="font-size: 0.75rem;">Published</span>
+                                </div>
+                                <div class="vr" style="height: 30px; opacity: 0.2;"></div>
+                                <div>
+                                    <span class="d-block fw-semibold text-heading">{{ $post['read_time'] }}</span>
+                                    <span class="small" style="font-size: 0.75rem;">Reading Time</span>
+                                </div>
                             </div>
-                            <div class="vr" style="height: 30px; opacity: 0.2;"></div>
-                            <div>
-                                <span class="d-block fw-semibold text-heading">{{ $post['date'] }}</span>
-                                <span class="small" style="font-size: 0.75rem;">Published</span>
-                            </div>
-                            <div class="vr" style="height: 30px; opacity: 0.2;"></div>
-                            <div>
-                                <span class="d-block fw-semibold text-heading">{{ $post['read_time'] }}</span>
-                                <span class="small" style="font-size: 0.75rem;">Reading Time</span>
+
+                            <!-- Top Share Links -->
+                            <div class="d-flex align-items-center gap-1.5">
+                                <span class="fw-semibold text-heading me-1 small" style="font-size: 0.78rem;">Share:</span>
+                                <a href="https://api.whatsapp.com/send?text={{ urlencode($post['title'] . ' - ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-light border-0 rounded-circle text-success shadow-xs d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(37, 211, 102, 0.1);" title="Share on WhatsApp">
+                                    <i class="bi bi-whatsapp" style="font-size: 0.9rem;"></i>
+                                </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-light border-0 rounded-circle text-primary shadow-xs d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(24, 119, 242, 0.1);" title="Share on Facebook">
+                                    <i class="bi bi-facebook" style="font-size: 0.9rem;"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-light border-0 rounded-circle text-info shadow-xs d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(10, 102, 194, 0.1);" title="Share on LinkedIn">
+                                    <i class="bi bi-linkedin" style="font-size: 0.9rem;"></i>
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ urlencode($post['title']) }}&url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-light border-0 rounded-circle text-dark shadow-xs d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(0, 0, 0, 0.08);" title="Share on X (Twitter)">
+                                    <i class="bi bi-twitter-x" style="font-size: 0.9rem;"></i>
+                                </a>
+                                <a href="javascript:void(0)" onclick="if(navigator.clipboard){navigator.clipboard.writeText(window.location.href);alert('Article link copied to clipboard! You can share it on Instagram.');}" class="btn btn-sm btn-light border-0 rounded-circle text-danger shadow-xs d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(225, 48, 108, 0.1);" title="Share on Instagram">
+                                    <i class="bi bi-instagram" style="font-size: 0.9rem;"></i>
+                                </a>
                             </div>
                         </div>
 
+                        @if(!empty($post['excerpt']))
+                            <!-- Short Description / Excerpt -->
+                            <div class="blog-short-description mb-4 p-3.5 rounded-3" style="background: rgba(0, 109, 171, 0.04); border-left: 4px solid var(--primary); font-size: 1.02rem; line-height: 1.6; color: var(--text-heading);">
+                                <p class="mb-0 fw-medium opacity-90">{{ $post['excerpt'] }}</p>
+                            </div>
+                        @endif
+
                         <!-- Featured Image -->
-                        <div class="position-relative overflow-hidden mb-4" style="border-radius: 16px; aspect-ratio: 4 / 3; width: 100%; max-height: 520px;">
+                        <div class="position-relative overflow-hidden mb-4" style="border-radius: 16px; aspect-ratio: 16 / 9; width: 100%; max-height: 520px; background: rgba(0,0,0,0.03);">
                             <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" class="w-100 h-100 object-fit-cover">
-                            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.25));"></div>
                         </div>
 
                         <!-- Article Content -->
@@ -211,12 +239,21 @@
                                 <h5 class="fw-bold text-heading mb-1" style="font-size: 1.1rem;">Found this article helpful?</h5>
                                 <p class="text-muted-custom small mb-0">Share it with your friends or classmates who are searching for training institutes.</p>
                             </div>
-                            <div class="d-flex gap-2">
-                                <a href="https://api.whatsapp.com/send?text={{ urlencode($post['title'] . ' - ' . url()->current()) }}" target="_blank" class="btn btn-success btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
-                                    WhatsApp
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="https://api.whatsapp.com/send?text={{ urlencode($post['title'] . ' - ' . url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
+                                    <i class="bi bi-whatsapp"></i> WhatsApp
                                 </a>
-                                <a href="https://twitter.com/intent/tweet?text={{ urlencode($post['title']) }}&url={{ urlencode(url()->current()) }}" target="_blank" class="btn btn-dark btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
-                                    Twitter
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
+                                    <i class="bi bi-facebook"></i> Facebook
+                                </a>
+                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-info text-white btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?text={{ urlencode($post['title']) }}&url={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
+                                    <i class="bi bi-twitter-x"></i> 
+                                </a>
+                                <a href="javascript:void(0)" onclick="if(navigator.clipboard){navigator.clipboard.writeText(window.location.href);alert('Article link copied to clipboard! You can share it on Instagram.');}" class="btn btn-danger btn-sm px-3 rounded-pill fw-semibold d-inline-flex align-items-center gap-1">
+                                    <i class="bi bi-instagram"></i> Instagram
                                 </a>
                             </div>
                         </div>
@@ -262,7 +299,7 @@
                                 @foreach (array_slice($allPosts, 0, 5, true) as $otherSlug => $otherPost)
                                     @if ($otherSlug !== $post['slug'])
                                         <a href="{{ url('/blog/' . $otherSlug) }}" class="text-decoration-none d-flex gap-3 group align-items-center pb-2.5 border-bottom border-light-subtle">
-                                            <div class="overflow-hidden rounded-3 shadow-xs position-relative" style="width: 76px; aspect-ratio: 4 / 3; flex-shrink: 0;">
+                                            <div class="overflow-hidden rounded-3 shadow-xs position-relative" style="width: 84px; aspect-ratio: 16 / 9; flex-shrink: 0;">
                                                 <img src="{{ $otherPost['image'] }}" alt="{{ $otherPost['title'] }}" class="w-100 h-100 object-fit-cover transition-transform" style="transition: transform 0.4s;">
                                             </div>
                                             <div class="flex-grow-1 min-w-0">
@@ -280,21 +317,86 @@
                             </div>
                         </div>
 
-                        <!-- 3. CTA Premium Card -->
-                        <div class="why-feature-card p-4 border-0 text-white overflow-hidden position-relative shadow-sm" 
+                        <!-- 3. Sidebar Callback Inquiry Form -->
+                        <div class="why-feature-card p-4 border-0 shadow-sm" style="border-radius: 24px !important; background: var(--bg-surface);">
+                            <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom" style="border-color: rgba(0,109,171,0.08) !important;">
+                                <i class="bi bi-telephone-inbound-fill text-primary fs-5"></i>
+                                <h5 class="fw-bold mb-0 text-heading" style="font-size: 1.05rem;">Request Callback</h5>
+                            </div>
+                            <p class="text-muted-custom small mb-3" style="font-size: 0.82rem; line-height: 1.5;">
+                                Want expert guidance for summer training? Leave your details below and we will call you back.
+                            </p>
+                            
+                            <form id="sidebarCallbackForm" onsubmit="return handleSidebarLeadSubmit(event)">
+                                <div class="mb-3">
+                                    <label for="sidebarLeadName" class="form-label small fw-semibold text-heading mb-1" style="font-size: 0.8rem;">Your Name</label>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-person"></i></span>
+                                        <input type="text" 
+                                               class="form-control form-control-sm border-start-0 ps-0" 
+                                               id="sidebarLeadName" 
+                                               name="name" 
+                                               placeholder="Enter your full name" 
+                                               required 
+                                               style="font-size: 0.85rem;">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="sidebarLeadMobile" class="form-label small fw-semibold text-heading mb-1" style="font-size: 0.8rem;">Mobile Number</label>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-phone"></i></span>
+                                        <input type="tel" 
+                                               class="form-control form-control-sm border-start-0 ps-0" 
+                                               id="sidebarLeadMobile" 
+                                               name="mobile" 
+                                               placeholder="10-digit mobile number" 
+                                               required 
+                                               pattern="[6-9][0-9]{9}" 
+                                               maxlength="10" 
+                                               title="Mobile number must start with 6, 7, 8, or 9 and be exactly 10 digits"
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length > 10) this.value = this.value.slice(0, 10);"
+                                               style="font-size: 0.85rem;">
+                                    </div>
+                                    <div class="form-text text-muted" style="font-size: 0.72rem;">Must start with 6, 7, 8, or 9 (10 digits)</div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-sm w-100 rounded-pill py-2.5 fw-semibold d-flex align-items-center justify-content-center gap-1 shadow-xs" style="font-size: 0.85rem;">
+                                    <i class="bi bi-send-fill" style="font-size: 0.75rem;"></i> Request Callback
+                                </button>
+                                <div id="sidebarLeadSuccess" class="alert alert-success p-2 mt-2 text-center small d-none mb-0" style="font-size: 0.78rem;">
+                                    <i class="bi bi-check-circle-fill me-1"></i> Thank you! Request submitted.
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 4. Direct Counseling Call & WhatsApp CTA Card -->
+                        <div class="why-feature-card p-4 border-0 text-white overflow-hidden position-relative shadow-sm text-center" 
                              style="border-radius: 24px !important; background: var(--gradient-primary) !important;">
                             <!-- Glow background -->
                             <div class="position-absolute" style="width: 150px; height: 150px; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 75%); top: -20px; right: -20px; filter: blur(20px); pointer-events: none;"></div>
                             
-                            <h4 class="fw-bold mb-3 h5" style="letter-spacing: -0.2px;">Compare Training Institutes</h4>
+                            <h4 class="fw-bold mb-2 h5" style="letter-spacing: -0.2px;">Need Instant Guidance?</h4>
                             <p class="small mb-4 text-white-50" style="line-height: 1.6;">
-                                Don't rely on guesswork. Compare top-rated IT training programs in India side-by-side based on actual placement data, faculty profiles, and practical ratings.
+                                Connect directly with our training counselors for instant assistance, course syllabus, and fee details.
                             </p>
-                            <a class="btn btn-light text-primary fw-bold w-100 rounded-pill py-2.5 shadow-sm border-0 d-flex align-items-center justify-content-center gap-1" 
-                               href="{{ url('/summer-training-comparison') }}" 
-                               style="font-size: 0.88rem; transition: all 0.3s;">
-                                Compare Programs &rarr;
-                            </a>
+
+                            <div class="d-flex align-items-center justify-content-center gap-3">
+                                <a href="tel:9198483820" 
+                                   class="btn btn-light text-primary rounded-circle shadow-sm d-flex align-items-center justify-content-center flex-shrink-0" 
+                                   style="width: 50px; height: 50px; transition: transform 0.3s;" 
+                                   title="Call Counselor">
+                                    <i class="bi bi-telephone-fill fs-5"></i>
+                                </a>
+                                <a href="https://wa.me/919198483820?text=Hello%20DigiCoders,%20I%20want%20information%20regarding%20summer%20training%20courses." 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="btn btn-success text-white rounded-circle shadow-sm d-flex align-items-center justify-content-center flex-shrink-0" 
+                                   style="width: 50px; height: 50px; background-color: #25d366; border: none; transition: transform 0.3s;" 
+                                   title="WhatsApp Counselor">
+                                    <i class="bi bi-whatsapp fs-5"></i>
+                                </a>
+                            </div>
                         </div>
 
                     </div>
@@ -325,7 +427,7 @@
         .entry-content img {
             width: 100%;
             height: auto;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
             border-radius: 16px;
             margin: 1.5rem 0;
@@ -347,7 +449,27 @@
             }
         }
 
-        /* TOC Styling */
+        /* TOC Styling & Internal Scrollability */
+        .toc-navigation {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 6px;
+            scroll-behavior: smooth;
+        }
+        .toc-navigation::-webkit-scrollbar {
+            width: 5px;
+        }
+        .toc-navigation::-webkit-scrollbar-track {
+            background: rgba(0, 109, 171, 0.05);
+            border-radius: 4px;
+        }
+        .toc-navigation::-webkit-scrollbar-thumb {
+            background: rgba(0, 109, 171, 0.25);
+            border-radius: 4px;
+        }
+        .toc-navigation::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
         .toc-link {
             transition: all 0.25s ease;
         }
@@ -366,6 +488,78 @@
 
     @push('scripts')
     <script>
+    function handleSidebarLeadSubmit(event) {
+        event.preventDefault();
+        const form = document.getElementById('sidebarCallbackForm');
+        const nameInput = document.getElementById('sidebarLeadName');
+        const mobileInput = document.getElementById('sidebarLeadMobile');
+        const successAlert = document.getElementById('sidebarLeadSuccess');
+        const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+        
+        if (!nameInput || !mobileInput) return false;
+
+        const name = nameInput.value.trim();
+        const mobile = mobileInput.value.trim();
+
+        const mobileRegex = /^[6-9]\d{9}$/;
+        if (!mobileRegex.test(mobile)) {
+            alert('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.');
+            mobileInput.focus();
+            return false;
+        }
+
+        if (!name) {
+            alert('Please enter your name.');
+            nameInput.focus();
+            return false;
+        }
+
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Submitting...';
+        }
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        
+        fetch('{{ route('inquiry.store') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                mobile: mobile,
+                page_url: window.location.href
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (successAlert) {
+                successAlert.classList.remove('d-none');
+            }
+            nameInput.value = '';
+            mobileInput.value = '';
+            setTimeout(() => {
+                if (successAlert) successAlert.classList.add('d-none');
+            }, 6000);
+        })
+        .catch(err => {
+            console.error('Email inquiry dispatch error:', err);
+            alert('Submission failed. Please try again.');
+        })
+        .finally(() => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+
+        return false;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const tocLinks = document.querySelectorAll('.toc-link');
         if (tocLinks.length === 0) return;

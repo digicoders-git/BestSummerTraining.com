@@ -662,6 +662,9 @@
         </div>
     </section>
 
+    <!-- Callback Request Form Section -->
+    @include('components.callback-section', ['formId' => 'internshipCallbackForm'])
+
     <!-- 12. Final CTA -->
     @include('components.cta', [
         'title' => 'Make an Informed Educational Choice',

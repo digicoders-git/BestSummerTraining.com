@@ -3,6 +3,7 @@
 <meta name="description" content="@yield('meta_description', 'Compare summer training, industrial training, 6-month internships, and professional IT courses in India. Honest fee structure, curriculum, and placement comparison.')">
 <meta name="keywords" content="@yield('meta_keywords', 'best summer training institute, summer training in lucknow, industrial training, python summer training, mern stack training, php summer training, 45 days summer training, 6 months internship, digicoders technologies, best IT training institute')">
 <meta name="author" content="BestSummerTraining">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Favicons -->
 <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
@@ -35,6 +36,7 @@
 <!-- Robots & Indexing -->
 <meta name="robots" content="@yield('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')">
 <meta name="googlebot" content="index, follow">
+<meta name="google-site-verification" content="6KakaMXlDEDoD1KGUQF-yITLR0jY7ywYrKC-O-M89m4" />
 
 <!-- JSON-LD Structured Data -->
 @if(View::hasSection('json_ld'))

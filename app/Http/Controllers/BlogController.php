@@ -15,10 +15,20 @@ class BlogController extends Controller
      * @var array<int, string>
      */
     protected array $apiEndpoints = [
-        'http://localhost/thedigicoders-com/api/blogs',
+        'https://thedigicoders.com/api/blogs?location=bestsummertraining',
         'https://thedigicoders.com/api/blogs',
-        'http://thedigicoders.com/api/blogs',
     ];
+
+    /**
+     * Display the home page with latest blogs for location=bestsummertraining.
+     */
+    public function home(): View
+    {
+        $allBlogs = $this->getBlogPosts();
+        $blogs = array_slice($allBlogs, 0, 3, true);
+
+        return view('pages.home', compact('blogs'));
+    }
 
     /**
      * Display a listing of blog articles.
@@ -38,12 +48,7 @@ class BlogController extends Controller
         $posts = $this->getBlogPosts();
 
         if (! isset($posts[$slug])) {
-            $fallback = $this->getFallbackPosts();
-            if (isset($fallback[$slug])) {
-                $posts[$slug] = $fallback[$slug];
-            } else {
-                abort(404);
-            }
+            abort(404);
         }
 
         $post = $posts[$slug];
@@ -55,32 +60,31 @@ class BlogController extends Controller
     }
 
     /**
-     * Fetch blog articles from candidate APIs with location filtering & local fallback.
+     * Fetch blog articles from candidate APIs with location filtering.
+     * Strictly includes items where location == 'bestsummertraining' only.
      *
      * @return array<string, array<string, mixed>>
      */
-    protected function getBlogPosts(): array
+    public function getBlogPosts(): array
     {
-        return Cache::remember('api_blogs_bestsummertraining_v2', 300, function () {
+        return Cache::remember('api_blogs_bestsummertraining_v4', 60, function () {
             $rawBlogs = $this->fetchFromApi();
 
             if (empty($rawBlogs)) {
-                return $this->getFallbackPosts();
+                return [];
             }
 
             // Strictly filter blogs for location = bestsummertraining ONLY
             $sourceBlogs = array_filter($rawBlogs, function ($item) {
                 $loc = strtolower(trim($item['location'] ?? ''));
+                $status = $item['status'] ?? 'true';
+                $isValidStatus = ($status === 'true' || $status === true || $status === '1' || $status === 1);
 
-                return $loc === 'bestsummertraining';
+                return $loc === 'bestsummertraining' && $isValidStatus;
             });
 
             $normalized = [];
             foreach ($sourceBlogs as $item) {
-                if (isset($item['status']) && $item['status'] === false) {
-                    continue;
-                }
-
                 $slug = trim($item['url'] ?? $item['slug'] ?? ('blog-'.$item['id']));
                 if (empty($slug)) {
                     continue;
@@ -91,25 +95,47 @@ class BlogController extends Controller
                     $rawExcerpt = Str::limit(strip_tags($item['content'] ?? ''), 160);
                 }
 
+                $imgUrl = trim($item['img'] ?? '');
+                // Check if imgUrl is a valid image or fallback to sleek default image
+                if (empty($imgUrl) || Str::endsWith(strtolower($imgUrl), ['.docx', '.doc', '.pdf'])) {
+                    $imgUrl = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80';
+                }
+
+                $faqs = [];
+                if (! empty($item['faqs'])) {
+                    if (is_string($item['faqs'])) {
+                        $decoded = json_decode($item['faqs'], true);
+                        if (is_array($decoded)) {
+                            $faqs = $decoded;
+                        }
+                    } elseif (is_array($item['faqs'])) {
+                        $faqs = $item['faqs'];
+                    }
+                }
+
                 $normalized[$slug] = [
                     'id' => $item['id'] ?? '',
                     'title' => $item['title'] ?? 'Untitled Article',
+                    'meta_title' => $item['meta_title'] ?? ($item['title'] ?? ''),
                     'slug' => $slug,
                     'excerpt' => $rawExcerpt,
                     'content' => $item['content'] ?? '',
-                    'author' => 'DigiCoders Team',
+                    'author' => ! empty($item['author_name']) ? $item['author_name'] : 'DigiCoders Team',
+                    'author_designation' => $item['author_designation'] ?? 'Tech Expert',
                     'date' => isset($item['date']) ? date('M d, Y', strtotime($item['date'])) : 'Recent',
+                    'time' => $item['time'] ?? '',
                     'category' => 'Summer Training',
                     'read_time' => '5 min read',
-                    'image' => ! empty($item['img']) ? $item['img'] : 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+                    'image' => $imgUrl,
+                    'img_alt' => $item['img_alt'] ?? ($item['title'] ?? ''),
                     'meta_description' => $item['meta_description'] ?? '',
                     'keywords' => $item['keywords'] ?? '',
                     'location' => $item['location'] ?? '',
-                    'faqs' => is_string($item['faqs'] ?? null) ? json_decode($item['faqs'], true) : ($item['faqs'] ?? []),
+                    'faqs' => $faqs,
                 ];
             }
 
-            return ! empty($normalized) ? $normalized : $this->getFallbackPosts();
+            return $normalized;
         });
     }
 
@@ -122,8 +148,7 @@ class BlogController extends Controller
     {
         foreach ($this->apiEndpoints as $url) {
             try {
-                $timeout = str_contains($url, 'localhost') ? 2 : 5;
-                $response = Http::withoutVerifying()->timeout($timeout)->get($url);
+                $response = Http::withoutVerifying()->timeout(5)->get($url);
 
                 if ($response->successful()) {
                     $data = $response->json();
@@ -142,44 +167,12 @@ class BlogController extends Controller
 
     /**
      * Fallback blog posts if API is unreachable.
+     * Returns empty array to prevent displaying dummy posts.
      *
      * @return array<string, array<string, mixed>>
      */
     protected function getFallbackPosts(): array
     {
-        return [
-            '5-mistakes-choosing-summer-training' => [
-                'id' => '1',
-                'title' => 'Top 5 Mistakes Students Make When Choosing a Summer Training Institute',
-                'slug' => '5-mistakes-choosing-summer-training',
-                'excerpt' => "Don't fall for fancy marketing. Learn how to verify lab facilities, mentor quality, and project authenticity before enrolling in a summer training program.",
-                'content' => '<p>Choosing a summer training institute is one of the most critical decisions a tech student makes...</p>',
-                'author' => 'Aman Sharma',
-                'date' => 'July 15, 2026',
-                'category' => 'Summer Training',
-                'read_time' => '5 min read',
-                'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
-                'meta_description' => '',
-                'keywords' => '',
-                'location' => 'bestsummertraining',
-                'faqs' => [],
-            ],
-            'practical-experience-importance' => [
-                'id' => '2',
-                'title' => 'Why Practical Experience is 10x More Important Than Theoretical Certificates',
-                'slug' => 'practical-experience-importance',
-                'excerpt' => 'Certificates look good on paper, but code on GitHub gets jobs. Discover why the software industry has shifted towards hands-on project verification.',
-                'content' => '<p>The traditional IT education system is built on slide decks and exam papers...</p>',
-                'author' => 'Rohan Varma',
-                'date' => 'July 12, 2026',
-                'category' => 'Career Guidance',
-                'read_time' => '4 min read',
-                'image' => 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80',
-                'meta_description' => '',
-                'keywords' => '',
-                'location' => 'bestsummertraining',
-                'faqs' => [],
-            ],
-        ];
+        return [];
     }
 }

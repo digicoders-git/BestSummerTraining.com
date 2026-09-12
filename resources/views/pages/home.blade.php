@@ -1117,6 +1117,79 @@
         </div>
     </section>
 
+    <!-- Latest Articles & Career Guides Section -->
+    @if(isset($blogs) && count($blogs) > 0)
+    <section class="py-5 bg-body-tertiary border-top border-bottom">
+        <div class="container py-4">
+            <div class="text-center mb-5 fade-up animate-on-scroll">
+                <div class="d-inline-flex align-items-center gap-2 badge-premium mb-3">
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--primary); display: inline-block;"></span>
+                    <span class="small fw-semibold" style="color: var(--primary);">Career Guides & Articles</span>
+                    <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--primary); display: inline-block;"></span>
+                </div>
+                <h2 class="fw-bold mb-2" style="font-size: 2rem;">Latest Articles & Insights</h2>
+                <p class="text-muted-custom">Explore expert advice, training guides, and career preparation articles</p>
+            </div>
+
+            <div class="row g-4">
+                @foreach ($blogs as $slug => $post)
+                    <div class="col-lg-4 col-md-6 fade-up animate-on-scroll">
+                        <div class="why-feature-card h-100 d-flex flex-column overflow-hidden border-0" 
+                             style="border-radius: 24px !important; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+                            
+                            <!-- Blog Image -->
+                            <div class="position-relative overflow-hidden" style="aspect-ratio: 16 / 9; width: 100%; border-radius: 24px 24px 0 0;">
+                                <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" class="w-100 h-100 object-fit-cover blog-card-image" style="transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                                <span class="position-absolute top-3 start-3 badge bg-primary text-white border-0 px-2.5 py-1 fw-semibold" style="border-radius: 30px; font-size: 0.72rem;">
+                                    {{ $post['category'] ?? 'Summer Training' }}
+                                </span>
+                            </div>
+
+                            <!-- Blog Content -->
+                            <div class="p-3.5 p-md-4 flex-grow-1 d-flex flex-column">
+                                <div class="d-flex align-items-center gap-2 mb-2 text-muted" style="font-size: 0.78rem;">
+                                    <span>{{ $post['date'] }}</span>
+                                    <span>&bull;</span>
+                                    <span>{{ $post['read_time'] ?? '5 min read' }}</span>
+                                </div>
+                                
+                                <h3 class="fw-bold mb-2 h6 hd-text-heading text-limit-2" style="font-size: 1.02rem; line-height: 1.35;">
+                                    <a href="{{ url('/blog/' . $slug) }}" class="text-decoration-none text-reset stretched-link">
+                                        {{ $post['title'] }}
+                                    </a>
+                                </h3>
+                                
+                                <p class="hd-text-body text-muted-custom small flex-grow-1 mb-3 text-limit-2" style="line-height: 1.5; font-size: 0.85rem;">
+                                    {{ $post['excerpt'] }}
+                                </p>
+
+                                <div class="d-flex align-items-center justify-content-between pt-2.5 mt-auto border-top" style="border-color: rgba(0, 109, 171, 0.1) !important;">
+                                    <div class="d-flex align-items-center gap-1 text-primary small fw-semibold text-truncate me-2" style="font-size: 0.78rem; max-width: 150px;">
+                                        <i class="bi bi-person-fill"></i>
+                                        <span class="text-truncate">{{ $post['author'] ?? 'DigiCoders Team' }}</span>
+                                    </div>
+                                    <span class="small fw-bold text-primary d-flex align-items-center gap-1" style="font-size: 0.8rem;">
+                                        Read Article &rarr;
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url('/blog') }}" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-semibold">
+                    View All Articles &rarr;
+                </a>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Callback Request Form Section -->
+    @include('components.callback-section', ['formId' => 'homeCallbackForm'])
+
     <!-- CTA Section -->
     @include('components.cta', [
         'title' => 'Ready to Compare Training Options?',

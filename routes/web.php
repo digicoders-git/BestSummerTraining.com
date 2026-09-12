@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\InquiryController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'pages.home');
+Route::get('/', [BlogController::class, 'home'])->name('home');
+Route::post('/submit-inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
 Route::view('/summer-training-comparison', 'pages.summer-training');
 Route::view('/internship-comparison', 'pages.internship');
 Route::view('/industrial-training-comparison', 'pages.industrial-training');

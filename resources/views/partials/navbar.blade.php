@@ -2,11 +2,11 @@
 <nav class="navbar navbar-expand-lg fixed-top premium-navbar" id="main-navbar">
     <div class="container px-4">
 
-        <!-- Brand -->
+    
         <!-- Brand -->
         <a class="navbar-brand py-0 d-flex align-items-center" href="{{ url('/') }}" style="text-decoration: none;">
-            <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-light" style="height: 100px; margin: -10px 0; width: auto; object-fit: contain;">
-            <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-dark" style="height: 100px; margin: -10px 0; width: auto; object-fit: contain; display: none;">
+            <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-light" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain;">
+            <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-dark" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain; display: none;">
         </a>
 
         <!-- Mobile Toggle -->
@@ -102,7 +102,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 {{ request()->is('blog*') ? 'nav-active' : '' }}"
-                        href="{{ url('/blog') }}" style="font-size: 0.88rem; font-weight: 500;">Blog</a>
+                        href="{{ url('/blog') }}" style="font-size: 0.88rem; font-weight: 500;">Blogs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 {{ request()->is('contact') ? 'nav-active' : '' }}"
@@ -278,7 +278,7 @@
             <span class="mob-link-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             </span>
-            <span>Blog</span>
+            <span>Blogs</span>
             <svg class="mob-link-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         <a href="{{ url('/contact') }}" class="mob-nav-link {{ request()->is('contact') ? 'mob-active' : '' }}">

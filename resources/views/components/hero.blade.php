@@ -64,17 +64,6 @@
             Compare Summer Training, Industrial Training, Internship, Apprenticeship and Professional Courses across <span style="color: var(--primary); font-weight: 600;">100+ factors</span> and choose the best program for your future.
         </p>
         
-        {{-- CTA Buttons --}}
-        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center mb-4 animate-on-scroll delay-3">
-            <a href="#compare" class="btn rounded-2 px-4 py-3 d-inline-flex align-items-center gap-2 text-white border-0 hero-primary-btn" style="background: var(--gradient-primary); font-size: 0.95rem; font-weight: 600; box-shadow: 0 8px 28px var(--primary-glow); transition: all 0.3s;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><path d="M18 8h4a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4"/><circle cx="8" cy="12" r="2"/></svg>
-                Compare Programs Now &rarr;
-            </a>
-            <a href="#categories" class="btn rounded-2 px-4 py-3 d-inline-flex align-items-center gap-2 border hero-secondary-btn" style="font-size: 0.95rem; font-weight: 600; backdrop-filter: blur(8px); transition: all 0.3s;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                Explore Guides
-            </a>
-        </div>
 
         {{-- Trust Avatars --}}
         <!-- <div class="d-flex align-items-center justify-content-center gap-3 mb-0 animate-on-scroll delay-4">
