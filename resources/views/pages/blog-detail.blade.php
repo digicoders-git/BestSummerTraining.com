@@ -148,6 +148,11 @@
                                     <span class="d-block fw-semibold text-heading">{{ $post['read_time'] }}</span>
                                     <span class="small" style="font-size: 0.75rem;">Reading Time</span>
                                 </div>
+                                <div class="vr" style="height: 30px; opacity: 0.2;"></div>
+                                <div>
+                                    <span class="d-block fw-semibold text-heading"><i class="bi bi-eye-fill text-primary me-1"></i>{{ number_format($post['views_count'] ?? 0) }}</span>
+                                    <span class="small" style="font-size: 0.75rem;">Views</span>
+                                </div>
                             </div>
 
                             <!-- Top Share Links -->
@@ -183,9 +188,28 @@
                             <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" class="w-100 h-100 object-fit-cover">
                         </div>
 
-                        <!-- Article Content -->
-                        <div class="hd-text-body text-body-custom mt-4 entry-content" style="font-size: 1.05rem; line-height: 1.8;">
-                            {!! $processedContent !!}
+                        <!-- Article Content Container with Read More Toggle -->
+                        <div class="position-relative mt-4 mb-2">
+                            <div id="blog-content-wrapper" class="blog-content-collapsed">
+                                <div class="hd-text-body text-body-custom entry-content" style="font-size: 1.05rem; line-height: 1.8;">
+                                    {!! $processedContent !!}
+                                </div>
+                            </div>
+                            
+                            <!-- Gradient Fade Overlay -->
+                            <div id="blog-content-fade" class="blog-content-fade-overlay"></div>
+
+                            <!-- Read More / Read Less Toggle Button -->
+                            <div id="read-more-wrapper" class="text-center mt-3 pt-2 position-relative" style="z-index: 5;">
+                                <button type="button" 
+                                        id="btn-toggle-read-more" 
+                                        onclick="toggleBlogContentReadMore()" 
+                                        class="btn btn-primary rounded-pill px-4 py-2.5 fw-semibold shadow-sm d-inline-flex align-items-center gap-2"
+                                        style="font-size: 0.92rem; letter-spacing: 0.2px;">
+                                    <span id="read-more-btn-text">Read More</span>
+                                    <i class="bi bi-chevron-down fw-bold ms-1" id="read-more-btn-icon" style="transition: transform 0.3s ease;"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Article FAQs Section -->
@@ -309,7 +333,11 @@
                                                 <h6 class="fw-bold text-heading mb-1 text-limit-2" style="font-size: 0.85rem; line-height: 1.35; transition: color 0.2s;">
                                                     {{ $otherPost['title'] }}
                                                 </h6>
-                                                <span class="small text-muted" style="font-size: 0.72rem;">{{ $otherPost['date'] }}</span>
+                                                <div class="d-flex align-items-center gap-2 small text-muted" style="font-size: 0.72rem;">
+                                                    <span>{{ $otherPost['date'] }}</span>
+                                                    <span>&bull;</span>
+                                                    <span><i class="bi bi-eye-fill text-primary"></i> {{ number_format($otherPost['views_count'] ?? 0) }}</span>
+                                                </div>
                                             </div>
                                         </a>
                                     @endif
@@ -478,10 +506,39 @@
             font-weight: 700 !important;
             transform: translateX(4px);
         }
-        .toc-link.active .toc-dot {
-            opacity: 1 !important;
-            transform: scale(1.6);
-            background-color: var(--primary) !important;
+        /* Read More Expander & Fade Overlay Styling */
+        .blog-content-collapsed {
+            max-height: 480px;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-content-expanded {
+            max-height: 50000px !important;
+            overflow: visible;
+            transition: max-height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-content-fade-overlay {
+            position: absolute;
+            bottom: 45px;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 60%, var(--bg-surface, #ffffff) 100%);
+            pointer-events: none;
+            z-index: 4;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        [data-bs-theme="dark"] .blog-content-fade-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.95) 60%, var(--bg-surface, #0f172a) 100%);
+        }
+
+        .blog-content-fade-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
     </style>
     @endpush
@@ -560,7 +617,54 @@
         return false;
     }
 
+    function toggleBlogContentReadMore() {
+        const wrapper = document.getElementById('blog-content-wrapper');
+        const fade = document.getElementById('blog-content-fade');
+        const btnText = document.getElementById('read-more-btn-text');
+        const btnIcon = document.getElementById('read-more-btn-icon');
+
+        if (!wrapper) return;
+
+        if (wrapper.classList.contains('blog-content-collapsed')) {
+            wrapper.classList.remove('blog-content-collapsed');
+            wrapper.classList.add('blog-content-expanded');
+            if (fade) fade.classList.add('blog-content-fade-hidden');
+            if (btnText) btnText.textContent = 'Read Less';
+            if (btnIcon) {
+                btnIcon.classList.remove('bi-chevron-down');
+                btnIcon.classList.add('bi-chevron-up');
+            }
+        } else {
+            wrapper.classList.remove('blog-content-expanded');
+            wrapper.classList.add('blog-content-collapsed');
+            if (fade) fade.classList.remove('blog-content-fade-hidden');
+            if (btnText) btnText.textContent = 'Read More';
+            if (btnIcon) {
+                btnIcon.classList.remove('bi-chevron-up');
+                btnIcon.classList.add('bi-chevron-down');
+            }
+
+            const articleBody = document.getElementById('article-body');
+            if (articleBody) {
+                articleBody.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
+        // Auto expand if article content height is already less than or equal to 500px
+        const wrapper = document.getElementById('blog-content-wrapper');
+        const fade = document.getElementById('blog-content-fade');
+        const btnWrapper = document.getElementById('read-more-wrapper');
+        const entryContent = wrapper ? wrapper.querySelector('.entry-content') : null;
+
+        if (entryContent && wrapper && entryContent.scrollHeight <= 500) {
+            wrapper.classList.remove('blog-content-collapsed');
+            wrapper.classList.add('blog-content-expanded');
+            if (fade) fade.style.display = 'none';
+            if (btnWrapper) btnWrapper.style.display = 'none';
+        }
+
         const tocLinks = document.querySelectorAll('.toc-link');
         if (tocLinks.length === 0) return;
 

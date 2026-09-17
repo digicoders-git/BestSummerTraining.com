@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogController::class, 'home'])->name('home');
@@ -33,3 +34,7 @@ Route::view('/ui-ux-design-training', 'pages.ui-ux-design');
 // Dynamic Blog Routes powered by BlogController (API Integration)
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+// Dynamic SEO Sitemap & Robots.txt Routes
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');

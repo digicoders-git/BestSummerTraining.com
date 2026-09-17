@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /vendor/
 Disallow: /storage/
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://bestsummertraining.com/sitemap.xml

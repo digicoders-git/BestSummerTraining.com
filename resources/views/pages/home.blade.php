@@ -1151,6 +1151,8 @@
                                     <span>{{ $post['date'] }}</span>
                                     <span>&bull;</span>
                                     <span>{{ $post['read_time'] ?? '5 min read' }}</span>
+                                    <span>&bull;</span>
+                                    <span class="d-inline-flex align-items-center gap-1"><i class="bi bi-eye-fill text-primary"></i> {{ number_format($post['views_count'] ?? 0) }} views</span>
                                 </div>
                                 
                                 <h3 class="fw-bold mb-2 h6 hd-text-heading text-limit-2" style="font-size: 1.02rem; line-height: 1.35;">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -41,9 +42,9 @@ class BlogController extends Controller
     }
 
     /**
-     * Display the specified blog article detail.
+     * Display the specified blog article detail and track view count.
      */
-    public function show(string $slug): View
+    public function show(Request $request, string $slug): View
     {
         $posts = $this->getBlogPosts();
 
@@ -52,6 +53,25 @@ class BlogController extends Controller
         }
 
         $post = $posts[$slug];
+
+        // Track blog view count via remote API
+        if (! empty($post['id'])) {
+            try {
+                $response = Http::withoutVerifying()->timeout(4)->post('https://thedigicoders.com/api/blogs/track-view', [
+                    'blog_id' => $post['id'],
+                    'ip_address' => $request->ip(),
+                ]);
+
+                if ($response->successful()) {
+                    $resData = $response->json();
+                    if (isset($resData['views_count'])) {
+                        $post['views_count'] = (int) $resData['views_count'];
+                    }
+                }
+            } catch (\Throwable $e) {
+                // Silently continue if view tracking fails or times out
+            }
+        }
 
         return view('pages.blog-detail', [
             'post' => $post,
@@ -126,6 +146,7 @@ class BlogController extends Controller
                     'time' => $item['time'] ?? '',
                     'category' => 'Summer Training',
                     'read_time' => '5 min read',
+                    'views_count' => (int) ($item['views_count'] ?? $item['views'] ?? $item['view_count'] ?? 0),
                     'image' => $imgUrl,
                     'img_alt' => $item['img_alt'] ?? ($item['title'] ?? ''),
                     'meta_description' => $item['meta_description'] ?? '',
