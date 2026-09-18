@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Apprenticeship Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'An educational guide comparing apprenticeship training programs. Evaluate practical learning, mentorship, and skill development between DigiCoders and other institutes.')
+@section('title', 'IT Apprenticeship Program Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare tech apprenticeship and job-oriented training in Lucknow. Evaluate practical code mentorship, live product engineering & placement assistance.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "IT Apprenticeship Program in Lucknow",
+  "description": "Comprehensive IT apprenticeship program providing daily code reviews, production engineering exposure, and technical career mentoring.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

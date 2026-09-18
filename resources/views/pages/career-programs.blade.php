@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Career Programs Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'A comprehensive educational guide comparing long-term career placement programs in IT. Evaluate job-oriented training models.')
+@section('title', 'Long-Term Career IT Programs Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare long-term job-oriented IT career programs in Lucknow. Evaluate full-stack engineering tracks, 100% placement support & live projects.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Full-Stack Career Placement Program in Lucknow",
+  "description": "Comprehensive long-term job guarantee career program covering full-stack software development, software engineering workflows, and job placement.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

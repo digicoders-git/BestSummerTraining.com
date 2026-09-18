@@ -4,9 +4,9 @@
 
     
         <!-- Brand -->
-        <a class="navbar-brand py-0 d-flex align-items-center" href="{{ url('/') }}" style="text-decoration: none;">
-            <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-light" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain;">
-            <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-dark" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain; display: none;">
+        <a class="navbar-brand py-0 d-flex align-items-center" href="{{ url('/') }}" title="BestSummerTraining Home" style="text-decoration: none;">
+            <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" title="BestSummerTraining Logo - DigiCoders Technologies" class="navbar-logo logo-light" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain;">
+            <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" title="BestSummerTraining Dark Logo - DigiCoders Technologies" class="navbar-logo logo-dark" style="height: 72px; margin: -6px 0; width: auto; object-fit: contain; display: none;">
         </a>
 
         <!-- Mobile Toggle -->

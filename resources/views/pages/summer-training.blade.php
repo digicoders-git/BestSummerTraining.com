@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Summer Training Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'A detailed, objective comparison of Summer Training programs between DigiCoders Technologies and other training institutes. Evaluate curriculum, projects, and mentorship.')
+@section('title', '45 Days Summer Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare 45-day summer training programs in Lucknow for CSE, IT, B.Tech & Diploma students. Objective comparison of fees, live projects, and placement data.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "45 Days Summer Training Program in Lucknow",
+  "description": "Comprehensive 45-day summer training in Python, MERN Stack, Java, PHP Laravel, and Mobile App Development with live projects at DigiCoders Technologies.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'UI/UX Design Course Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare Figma, Adobe XD, Wireframing, Prototyping, and User Experience Design training programs.')
+@section('title', 'UI/UX Design Course Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare Figma, Wireframing, Prototyping & User Experience Design training in Lucknow. Build real design systems & portfolios at DigiCoders.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "UI/UX & User Interface Design Course",
+  "description": "User Interface and User Experience design training using Figma, Adobe XD, wireframing, interactive prototyping, and design system engineering.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

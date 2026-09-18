@@ -69,13 +69,13 @@
         <!-- <div class="d-flex align-items-center justify-content-center gap-3 mb-0 animate-on-scroll delay-4">
             <div class="d-flex align-items-center">
                 <div class="rounded-circle overflow-hidden border hero-avatar-border" style="width: 32px; height: 32px; margin-right: -9px; z-index: 3;">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=75" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=75" alt="DigiCoders Student Reviewer" title="DigiCoders Enrolled Student Profile" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="rounded-circle overflow-hidden border hero-avatar-border" style="width: 32px; height: 32px; margin-right: -9px; z-index: 2;">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=75" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=75" alt="DigiCoders Student Reviewer" title="DigiCoders Enrolled Student Profile" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="rounded-circle overflow-hidden border hero-avatar-border" style="width: 32px; height: 32px; z-index: 1;">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=75" alt="Student" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=75" alt="DigiCoders Student Reviewer" title="DigiCoders Enrolled Student Profile" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div> -->
         <div class="d-flex align-items-center justify-content-center gap-2 mb-0 animate-on-scroll delay-4">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us | Call & WhatsApp DigiCoders Support')
-@section('meta_description', 'Get in touch with DigiCoders Technologies via Call or WhatsApp. Reach us directly at +91 9198483820, +91 6394296293, or +91 9801017529 for course counseling and support.')
+@section('title', 'Contact Us | DigiCoders Lucknow Admission & Counseling Support')
+@section('meta_description', 'Contact DigiCoders Technologies in Lucknow for summer training & internship admissions. Call +91 9198483820 or WhatsApp for direct course counseling.')
 @section('canonical_url', url()->current())
 
 @section('content')

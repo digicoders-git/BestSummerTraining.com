@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Best Summer Training Institute Comparison | DigiCoders Technologies vs Others')
-@section('meta_description', 'Compare 45-day summer training, 6-month industrial training, internships, and professional courses in Lucknow & India. Honest fee comparison, live project training, and placement data.')
+@section('title', 'Best Summer Training Institute Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare 45-day summer training & 6-month industrial training in Lucknow. Honest fee comparison, live project training, and placement data for CSE/IT students.')
 @section('meta_keywords', 'best summer training institute, summer training in lucknow, 45 days summer training fees, industrial training institute in lucknow, python summer training, mern stack training, php training, android app development, digicoders technologies')
 @section('canonical_url', url('/'))
 @section('og_image', asset('assets/images/logos/logo.png'))

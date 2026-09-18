@@ -9,8 +9,8 @@
             <!-- Brand Column -->
             <div class="col-lg-3 col-md-12 fade-up animate-on-scroll">
                 <div class="mb-3">
-                    <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-light" style="height: 78px; width: auto; object-fit: contain;">
-                    <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" class="navbar-logo logo-dark" style="height: 78px; width: auto; object-fit: contain; display: none;">
+                    <img src="{{ asset('assets/images/logos/logo.png') }}" alt="BestSummerTraining Logo" title="BestSummerTraining Logo - DigiCoders Technologies" class="navbar-logo logo-light" style="height: 78px; width: auto; object-fit: contain;">
+                    <img src="{{ asset('assets/images/logos/logo-dark.png') }}" alt="BestSummerTraining Logo" title="BestSummerTraining Dark Logo - DigiCoders Technologies" class="navbar-logo logo-dark" style="height: 78px; width: auto; object-fit: contain; display: none;">
                 </div>
                 <p class="text-muted-custom mb-4 small" style="line-height: 1.6; max-width: 280px;">
                     India's most transparent platform to compare training programs and make better career decisions.

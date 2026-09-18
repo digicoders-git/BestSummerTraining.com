@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Data Science & Machine Learning Training Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare Data Science, AI, Machine Learning, Python, NumPy, Pandas, and Scikit-Learn training courses.')
+@section('title', 'Data Science & Machine Learning Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare Data Science, AI, Machine Learning, Python, NumPy & Pandas training in Lucknow. Evaluate practical modeling & mentorship at DigiCoders.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Data Science & Machine Learning Training Course",
+  "description": "Practical Data Science and Artificial Intelligence course covering Python, NumPy, Pandas, Matplotlib, Scikit-Learn, and Machine Learning algorithms.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

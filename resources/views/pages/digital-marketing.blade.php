@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Digital Marketing Course Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare SEO, Social Media Marketing, Google Ads, Content Strategy, and Analytics training programs.')
+@section('title', 'Digital Marketing Course Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare SEO, Social Media Marketing, Google Ads & Performance Analytics training in Lucknow. Practical live campaign experience at DigiCoders.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Digital Marketing & Performance Growth Course",
+  "description": "Comprehensive digital marketing training covering Search Engine Optimization (SEO), PPC Google Ads, Social Media Marketing, Content Strategy, and Analytics.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Cloud Computing & DevOps Training Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare AWS, Linux, Docker, Kubernetes, and DevOps cloud computing training programs.')
+@section('title', 'Cloud Computing & DevOps Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare AWS, Linux, Docker & DevOps Cloud Computing training in Lucknow. Evaluate server deployment, CI/CD pipelines & hands-on labs.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Cloud Computing & DevOps Engineering Course",
+  "description": "Cloud infrastructure training covering AWS Cloud Services, Linux System Administration, Docker Containers, Nginx, and CI/CD Automation.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

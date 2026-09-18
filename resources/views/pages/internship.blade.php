@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Internship Comparison | DigiCoders vs Other Training Institutes')
-@section('meta_description', 'An objective, educational guide comparing internship opportunities at DigiCoders Technologies with other institutes. Evaluate projects, mentorship, and career readiness.')
+@section('title', 'Software Engineering Internship Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare IT internships & project-based training programs in Lucknow. Evaluate live software development, mentor support & placement opportunities.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Software Engineering Internship Program in Lucknow",
+  "description": "Hands-on project internship for IT students focusing on web engineering, mobile development, and real-time software deployment.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

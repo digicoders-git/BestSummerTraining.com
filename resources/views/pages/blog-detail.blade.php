@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', (!empty($post['title']) ? $post['title'] : 'Article') . ' | BestSummerTraining')
+@section('title', (!empty($post['meta_title']) ? $post['meta_title'] : (!empty($post['title']) ? $post['title'] : 'Article')) . ' | BestSummerTraining')
 @section('meta_description', !empty($post['meta_description']) ? $post['meta_description'] : ($post['excerpt'] ?? ''))
 @section('meta_keywords', !empty($post['keywords']) ? $post['keywords'] : 'summer training, industrial training, best summer training institute, digicoders, IT courses')
 @section('canonical_url', url('/blog/' . ($post['slug'] ?? '')))
@@ -26,12 +26,39 @@
             'logo' => [
                 '@type' => 'ImageObject',
                 'url' => asset('assets/images/logos/logo.png'),
+                'width' => 250,
+                'height' => 60,
             ],
         ],
         'description' => strip_tags($post['excerpt'] ?? ''),
         'mainEntityOfPage' => [
             '@type' => 'WebPage',
             '@id' => url('/blog/' . ($post['slug'] ?? '')),
+        ],
+    ];
+
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Home',
+                'item' => url('/'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Blog',
+                'item' => url('/blog'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 3,
+                'name' => $post['title'] ?? 'Article',
+                'item' => url('/blog/' . ($post['slug'] ?? '')),
+            ],
         ],
     ];
 
@@ -55,6 +82,9 @@
 @endphp
 <script type="application/ld+json">
 {!! json_encode($articleSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
 </script>
 @if(!empty($faqEntities))
 <script type="application/ld+json">
@@ -102,6 +132,26 @@
             return "<h{$level}{$attrs}>{$titleHtml}</h{$level}>";
         },
         $rawContent
+    );
+
+    // Auto-inject alt, title, and loading=lazy attributes into content img tags if missing
+    $processedContent = preg_replace_callback(
+        '/<img([^>]*)>/i',
+        function ($imgMatches) use ($post) {
+            $imgAttrs = $imgMatches[1];
+            $postTitle = e($post['title'] ?? 'Blog Image');
+            if (!str_contains($imgAttrs, 'alt=')) {
+                $imgAttrs .= ' alt="' . $postTitle . '"';
+            }
+            if (!str_contains($imgAttrs, 'title=')) {
+                $imgAttrs .= ' title="' . $postTitle . '"';
+            }
+            if (!str_contains($imgAttrs, 'loading=')) {
+                $imgAttrs .= ' loading="lazy"';
+            }
+            return "<img{$imgAttrs}>";
+        },
+        $processedContent
     );
 @endphp
 

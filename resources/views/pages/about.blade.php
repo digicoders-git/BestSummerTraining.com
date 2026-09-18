@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'About Us | TrainingCompare India')
-@section('meta_description', 'Learn about our methodology for comparing IT training institutes in India objectively and transparently.')
+@section('title', 'About Us | BestSummerTraining - DigiCoders Technologies')
+@section('meta_description', 'Learn about BestSummerTraining methodology for comparing 45-day summer training, industrial internships, and IT courses in Lucknow objectively.')
 
 @section('content')
     <!-- Hero Section -->

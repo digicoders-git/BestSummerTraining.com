@@ -1,8 +1,59 @@
 @extends('layouts.app')
 
-@section('title', 'Master FAQ Hub | Compare IT Training Programs')
-@section('meta_description', 'Comprehensive FAQ hub answering common questions about summer training, internships, industrial training, and apprenticeships. Learn how to choose the right tech program.')
+@section('title', 'Master FAQ Hub | IT Summer Training & Internship Comparison')
+@section('meta_description', 'Master FAQ Hub for IT Summer Training, 6-Month Internships, and Industrial Training in Lucknow. Clear answers on fees, certificates, live projects & placement.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an IT training institute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An IT training institute is an educational organization that focuses on teaching practical, industry-relevant software development and technology skills."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why should I compare training providers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Comparing training providers is crucial because the quality of tech education, mentor expertise, and practical exposure levels vary drastically across the industry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How should students evaluate a training program?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Students should evaluate a training program by examining relevance of curriculum to job postings, practical coding ratio, mentor background, and live project complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are offline classes better than online training?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Offline classes offer a structured, distraction-free environment and immediate face-to-face mentor access, while online training provides flexibility and zero commute."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does completing a program guarantee a job?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No honest program guarantees employment. Quality training equips you with skills, portfolio projects, and placement assistance, but securing a job depends on interview performance."
+      }
+    }
+  ]
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->
@@ -10,7 +61,7 @@
         'breadcrumbs' => ['Home' => url('/'), 'FAQ Hub' => url()->current()],
         'badge' => 'Master FAQ Hub',
         'title' => 'Your Questions About <span class="text-primary-custom">IT Training</span> Answered',
-        'description' => 'Navigating the tech education landscape can be confusing. This dedicated FAQ Hub answers the most common questions students have regarding Summer Training, Internships, Industrial Training, and Apprenticeships. We aim to provide clear, neutral, and educational answers to help you evaluate training providers, compare options, and ultimately choose the learning path that best aligns with your career goals.',
+        'description' => 'Comprehensive answers to common questions about 45-day Summer Training, 6-Month Internships, Industrial Training, and Apprenticeships. Compare options with clarity.',
         'primaryLink' => '#general-questions',
         'primaryBtnText' => 'Browse Questions',
         'secondaryLink' => url('/blog'),

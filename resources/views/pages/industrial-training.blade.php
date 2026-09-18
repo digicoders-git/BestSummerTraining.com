@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Industrial Training Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'A comprehensive educational guide comparing industrial training programs. Evaluate practical learning, projects, and mentorship between DigiCoders and other institutes.')
+@section('title', '6 Months Industrial Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare 6-month industrial training programs in Lucknow for B.Tech & MCA final year students. Evaluate fee structures, live client projects & placement data.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "6 Months Industrial Training Program in Lucknow",
+  "description": "6-month industrial training for final year B.Tech, MCA & Diploma students covering full-stack software development and live industry projects.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

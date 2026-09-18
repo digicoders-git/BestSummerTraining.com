@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Mobile App Development Training Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare Flutter, React Native, Android (Kotlin), and iOS mobile development training programs.')
+@section('title', 'Mobile App Development Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare Flutter, React Native & Android App Development training in Lucknow. Evaluate Play Store deployment & live project exposure.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Mobile App Development Course (Flutter & Android)",
+  "description": "Cross-platform and native mobile app development training covering Flutter, Dart, Kotlin, REST APIs, and Google Play Store deployment.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

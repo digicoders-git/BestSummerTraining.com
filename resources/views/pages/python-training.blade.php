@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Python Training & Full-Stack Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare Python, Django, Data Analytics and Automation courses. Evaluate practical project learning and mentor credentials.')
+@section('title', 'Python & Django Training Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare Python, Django, Web Automation & Data Analytics training in Lucknow. Evaluate practical project learning & mentorship at DigiCoders.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Python & Django Full-Stack Development Course",
+  "description": "Comprehensive Python training covering Core Python, Object Oriented Programming, Django Framework, REST APIs, and database integration.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

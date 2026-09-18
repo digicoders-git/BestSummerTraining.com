@@ -1,7 +1,45 @@
 @extends('layouts.app')
 
-@section('title', 'Guides & Career Blog | BestSummerTraining')
-@section('meta_description', 'Unbiased guidance, tech reviews, and insights to help you choose the right summer training and internship programs.')
+@section('title', 'Guides & Career Blog | IT Summer Training & Internship Insights')
+@section('meta_description', 'Read expert guidance, tech comparisons, and career insights for summer training, 6-month industrial internships, and IT courses in Lucknow & India.')
+@section('canonical_url', url()->current())
+
+@section('json_ld')
+@php
+    $blogItems = [];
+    $pos = 1;
+    foreach ($posts as $s => $p) {
+        $blogItems[] = [
+            '@type' => 'ListItem',
+            'position' => $pos++,
+            'url' => url('/blog/' . $s),
+            'name' => $p['title'] ?? '',
+        ];
+    }
+    $blogSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Blog',
+        'name' => 'BestSummerTraining Career & Tech Blog',
+        'url' => url('/blog'),
+        'description' => 'Unbiased research, tech comparisons, and expert advice for IT summer training and internship programs.',
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => 'BestSummerTraining',
+            'logo' => asset('assets/images/logos/logo.png'),
+        ],
+        'blogPost' => array_map(function($item) {
+            return [
+                '@type' => 'BlogPosting',
+                'headline' => $item['name'],
+                'url' => $item['url'],
+            ];
+        }, $blogItems),
+    ];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($blogSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+@endsection
 
 @section('content')
     <!-- Hero Section -->
@@ -27,7 +65,7 @@
                             
                             <!-- Blog Image Container -->
                             <div class="position-relative overflow-hidden" style="aspect-ratio: 16 / 9; width: 100%; border-radius: 24px 24px 0 0;">
-                                <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" class="w-100 h-100 object-fit-cover blog-card-image" style="transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+                                <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" title="{{ $post['title'] }}" class="w-100 h-100 object-fit-cover blog-card-image" style="transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
                                 <span class="position-absolute top-3 start-3 badge bg-primary text-white border-0 px-2.5 py-1 fw-semibold" style="border-radius: 30px; font-size: 0.72rem;">
                                     {{ $post['category'] }}
                                 </span>

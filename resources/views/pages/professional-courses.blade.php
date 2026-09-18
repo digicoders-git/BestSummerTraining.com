@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Career-Oriented Professional Courses Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'A comprehensive educational guide comparing professional courses in Data Analytics, Graphic Design, Digital Marketing, and BDE. Evaluate curriculum, software tools, and career support.')
+@section('title', 'Professional IT Courses Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare professional IT courses in Lucknow including Data Analytics, Full-Stack Dev & Digital Marketing. Compare curriculum, tools & career support.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Professional IT Certification Courses in Lucknow",
+  "description": "Career-oriented professional software development and technology certification courses with hands-on labs and placement support.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

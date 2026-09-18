@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'MERN Stack Developer Program Comparison | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare MongoDB, Express.js, React.js, and Node.js (MERN) Full-Stack courses. Evaluate live project mentorship.')
+@section('title', 'MERN Stack Developer Program Comparison in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare MongoDB, Express.js, React.js & Node.js (MERN) training in Lucknow. Evaluate live project mentorship, React Hooks & API building.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "MERN Stack Full-Stack Developer Course",
+  "description": "Full-stack JavaScript training in MongoDB, Express.js, React.js, and Node.js with live real-time web application deployment.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->

@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
-@section('title', 'Web Development Training Program | DigiCoders vs Other Institutes')
-@section('meta_description', 'Compare full-stack web development courses covering HTML5, CSS3, JavaScript, PHP, Laravel, React, and MySQL.')
+@section('title', 'Web Development Training Program in Lucknow | DigiCoders vs Others')
+@section('meta_description', 'Compare full-stack web development training in Lucknow covering HTML5, CSS3, JavaScript, PHP Laravel, React.js & MySQL with live projects.')
 @section('canonical_url', url()->current())
+
+@section('json_ld')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Full-Stack Web Development Course",
+  "description": "Comprehensive web development course covering frontend technologies, backend frameworks (PHP Laravel / Node.js), and database management.",
+  "provider": {
+    "@type": "Organization",
+    "name": "DigiCoders Technologies",
+    "sameAs": "https://thedigicoders.com"
+  }
+}
+</script>
+@endsection
 
 @section('content')
     <!-- 1. Hero Section -->
